@@ -32,18 +32,12 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                /*script {
+                script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub-username')]) {
-                       bat "echo ${dockerhub_password} | docker login --username ${dockerhub-username} --password-stdin https://registry.docker.io"
-                       bat 'docker push -t 9766945760/k8s-mysql-app:latest'
+                       bat 'echo ${dockerhub_password} | docker login --username ${dockerhub-username} --password-stdin https://registry.docker.io'
                     }
-                }*/
-                script{
-                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'docker-creds')]) {
-                        bat 'echo ${docker-creds} | docker login --username 9766945760 --password-stdin'
-                    }
-                    bat 'docker push 9766945760/k8s-mysql-app:latest'
                 }
+                bat 'docker push -t 9766945760/k8s-mysql-app:latest'
             }
         }
         stage('Deploy To K8s') {
