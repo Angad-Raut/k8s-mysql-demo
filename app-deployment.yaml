@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-demo-app
+  labels:
+    app: spring-demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-demo-app
+  template:
+    metadata:
+      labels:
+        app: spring-demo-app
+    spec:
+      containers:
+        - name: spring-demo-app
+          image: 9766945760/k8s-mysql-demo:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 9091
+          resources:
+            limits:
+              cpu: 0.2
+              memory: "200Mi"
+          env:
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: mysql-user-password
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name:  mysql-config-map
+                  key: mysql-host
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name:  mysql-config-map
+                  key: mysql-database-name
+            - name: MYSQL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config-map
+                  key: mysql-port
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: mysql-root-username
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-demo-app
+  labels:
+    app: spring-demo-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: spring-demo-app
+  ports:
+    - protocol: TCP
+      name: http
+      port: 9091
+      targetPort: 9091
+      nodePort: 30000
