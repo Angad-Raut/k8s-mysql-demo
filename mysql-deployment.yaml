@@ -53,17 +53,17 @@ spec:
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  name: mysql-config-map
+                  name: mysql-conf
                   key: mysql-database-name
             - name: MYSQL_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: mysql-config-map
+                  name: mysql-conf
                   key: mysql-host
             - name: MYSQL_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: mysql-config-map
+                  name: mysql-conf
                   key: mysql-port
             - name: MYSQL_PASSWORD
               valueFrom:
