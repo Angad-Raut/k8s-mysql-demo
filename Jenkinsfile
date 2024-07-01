@@ -40,7 +40,7 @@ pipeline {
                 }*/
                 script{
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'docker-creds')]) {
-                        bat 'docker login -u 99766945760 -p ${docker-creds} --password-stdin https://registry.docker.io'
+                        bat 'echo ${docker-creds} | docker login --username 99766945760 --password-stdin https://registry.docker.io'
                     }
                     bat 'docker push 9766945760/k8s-mysql-app:latest'
                 }
