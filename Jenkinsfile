@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps{
-                bat 'docker build -t 9766945760/k8s-mysql-demo1 .'
+                bat 'docker build -t 9766945760/k8s-mysql-demo .'
             }
         }
         stage('Docker Push') {
@@ -35,7 +35,6 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub-username')]) {
                        bat "echo ${dockerhub_password} | docker login --username ${dockerhub-username} --password-stdin https://registry.docker.io"
-                       bat 'docker tag k8s-mysql-demo1 9766945760/k8s-mysql-demo:latest'
                        bat 'docker push 9766945760/k8s-mysql-demo:latest'
                     }
                 }
