@@ -42,12 +42,16 @@ pipeline {
         }*/
         stage('Deploy To K8s') {
              steps {
-                  script{
+                  /*script{
                       kubernetesDeploy (configs: 'mysql-configmap.yaml',kubeconfigId: 'k8sconfig')
                       kubernetesDeploy (configs: 'mysql-secrets.yaml',kubeconfigId: 'k8sconfig')
                       kubernetesDeploy (configs: 'mysql-deployment.yaml',kubeconfigId: 'k8sconfig')
                       kubernetesDeploy (configs: 'app-deployment.yaml',kubeconfigId: 'k8sconfig')
-                  }
+                  }*/
+                  bat 'kubectl apply -f mysql-configmap.yaml'
+                  bat 'kubectl apply -f mysql-secrets.yaml'
+                  bat 'kubectl apply -f mysql-deployment.yaml'
+                  bat 'kubectl apply -f app-deployment.yaml'
                   echo 'SUCCESS'
              }
         }
