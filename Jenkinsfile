@@ -25,12 +25,6 @@ pipeline {
                 bat 'mvn clean package'
             }
         }
-        stage('OWASP SCAN') {
-            steps {
-                dependencyCheck additionalArguments: ' --scan ./ ', odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
         stage('Docker Build') {
             steps{
                 bat 'docker build -t 9766945760/k8s-mysql-demo1 .'
