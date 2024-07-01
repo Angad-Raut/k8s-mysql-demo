@@ -35,7 +35,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub-username')]) {
                        bat "echo ${dockerhub_password} | docker login --username ${dockerhub-username} --password-stdin https://registry.docker.io"
-                       bat 'docker push 9766945760/k8s-mysql-app:latest'
+                       bat 'docker push -t 9766945760/k8s-mysql-app:latest'
                     }
                 }
             }
