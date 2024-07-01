@@ -26,6 +26,7 @@ spec:
               cpu: 0.2
               memory: "200Mi"
           env:
+            - MYSQL_PORT: 3306
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -41,11 +42,6 @@ spec:
                 configMapKeyRef:
                   name: mysql-conf
                   key: mysql-database-name
-            - name: MYSQL_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-conf
-                  key: mysql-port
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:

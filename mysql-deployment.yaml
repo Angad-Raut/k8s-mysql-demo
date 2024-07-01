@@ -50,6 +50,7 @@ spec:
         - image: mysql:latest
           name: mysql
           env:
+            - MYSQL_PORT: 3306
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
@@ -60,11 +61,6 @@ spec:
                 configMapKeyRef:
                   name: mysql-conf
                   key: mysql-host
-            - name: MYSQL_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-conf
-                  key: mysql-port
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
