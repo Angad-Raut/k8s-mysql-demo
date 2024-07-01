@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy To K8s') {
              steps {
                   script{
-                      kubernetesDeploy (configs: 'mysql-configMap.yaml',kubeconfigId: 'k8sconfig')
+                      kubernetesDeploy (configs: 'mysql-configmap.yaml',kubeconfigId: 'k8sconfig')
                       kubernetesDeploy (configs: 'mysql-secrets.yaml',kubeconfigId: 'k8sconfig')
                       kubernetesDeploy (configs: 'mysql-deployment.yaml',kubeconfigId: 'k8sconfig')
                       kubernetesDeploy (configs: 'app-deployment.yaml',kubeconfigId: 'k8sconfig')
