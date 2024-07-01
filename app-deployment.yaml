@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: spring-demo-app
-          image: 9766945760/k8s-mysql-demo:latest
+          image: 9766945760/k8s-mysql-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

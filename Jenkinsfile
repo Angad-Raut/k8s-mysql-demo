@@ -1,6 +1,6 @@
 pipeline {
     environment {
-       registry = "9766945760/k8s-mysql-demo"
+       registry = "9766945760/k8s-mysql-app"
        registryCredential = 'dockerhub-credentials'
        dockerImage = ''
     }
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps{
-                bat 'docker build -t 9766945760/k8s-mysql-demo .'
+                bat 'docker build -t 9766945760/k8s-mysql-app .'
             }
         }
         stage('Docker Push') {
@@ -35,7 +35,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub-username')]) {
                        bat "echo ${dockerhub_password} | docker login --username ${dockerhub-username} --password-stdin https://registry.docker.io"
-                       bat 'docker push 9766945760/k8s-mysql-demo:latest'
+                       bat 'docker push 9766945760/k8s-mysql-app:latest'
                     }
                 }
             }

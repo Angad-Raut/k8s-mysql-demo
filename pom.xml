@@ -71,6 +71,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>k8s-mysql-demo</finalName>
+		<finalName>k8s-mysql-app</finalName>
 	</build>
 </project>
