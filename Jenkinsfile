@@ -30,7 +30,7 @@ pipeline {
                 bat 'docker build -t 9766945760/k8s-mysql-app .'
             }
         }
-        stage('Docker Push') {
+        /*stage('Docker Push') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub-username')]) {
@@ -39,7 +39,7 @@ pipeline {
                 }
                 bat 'docker push -t 9766945760/k8s-mysql-app:latest'
             }
-        }
+        }*/
         stage('Deploy To K8s') {
              steps {
                   script{
