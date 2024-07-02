@@ -55,12 +55,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: mysql-conf
-                  key: mysql-database-name
+                  key: database-name
             - name: MYSQL_HOST
               valueFrom:
                 configMapKeyRef:
                   name: mysql-conf
-                  key: mysql-host
+                  key: host
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:

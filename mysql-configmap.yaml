@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: mysql-conf
 data:
-  mysql-host: mysqlServer   # The name of mysql service
-  mysql-database-name: kubernetesDb     # The name of the database used by the demo app
+  host: mysql   # The name of mysql service
+  database-name: kubernetesDb     # The name of the database used by the demo app
