@@ -19,12 +19,13 @@ metadata:
   name: mysql-pvc
   labels:
     app: k8s-mysql-app
+    tier: mysql
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 3Gi
 
 ---
 apiVersion: apps/v1
