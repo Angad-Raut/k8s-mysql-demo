@@ -12,34 +12,29 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Angad-Raut/k8s-mysql-demo.git'
-            }
-        }
-        stage('Code Compile') {
-            steps {
-                bat 'mvn clean compile'
-            }
-        }
-        stage('Build Artifact') {
-            steps {
-                bat 'mvn clean package'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-secret', url: 'https://github.com/Angad-Raut/k8s-mysql-demo.git']])
+                bat 'mvn clean install'
+                echo 'Git Checkout Completed'
             }
         }
         stage('Docker Build') {
             steps{
-                bat 'docker build -t 9766945760/k8s-mysql-app .'
+                script {
+                    dockerImage = docker.build registry
+                    echo 'Build Image Completed'
+                }
             }
         }
-        /*stage('Docker Push') {
+        stage('Docker Push') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'dockerhub_password', usernameVariable: 'dockerhub-username')]) {
-                       bat 'echo ${dockerhub_password} | docker login --username ${dockerhub-username} --password-stdin https://registry.docker.io'
+                    docker.withRegistry( '', registryCredential ) {
+                       dockerImage.push('latest')
+                       echo 'Push Image Completed'
                     }
                 }
-                bat 'docker push -t 9766945760/k8s-mysql-app:latest'
             }
-        }*/
+        }
         stage('Deploy To K8s') {
              steps {
                   script{
@@ -50,6 +45,11 @@ pipeline {
                   }
                   echo 'SUCCESS'
              }
+        }
+    }
+    post{
+        always {
+    	   bat 'docker logout'
         }
     }
 }
