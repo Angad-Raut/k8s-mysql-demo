@@ -38,8 +38,8 @@ pipeline {
         stage('Deploy To K8s') {
              steps {
                   script{
-                      kubernetesDeploy (configs: 'mysql-deployment.yaml',kubeconfigId: 'k8sconfig')
-                      kubernetesDeploy (configs: 'app-deployment.yaml',kubeconfigId: 'k8sconfig')
+                      kubernetesDeploy(configs: 'mysql-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
+                      kubernetesDeploy(configs: 'app-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
                   }
                   echo 'SUCCESS'
              }
