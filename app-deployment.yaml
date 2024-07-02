@@ -26,7 +26,6 @@ spec:
               cpu: 0.2
               memory: "200Mi"
           env:
-            - MYSQL_PORT: 3306
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
