@@ -38,8 +38,8 @@ pipeline {
         stage('Deploy To K8s') {
              steps {
                   script{
-                      kubernetesDeploy configs: 'mysql-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubeconfig')
-                      kubernetesDeploy configs: 'app-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubeconfig')
+                      kubernetesDeploy (configs: 'mysql-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubeconfig')
+                      kubernetesDeploy (configs: 'app-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubeconfig')
                   }
                   echo 'SUCCESS'
              }
@@ -48,7 +48,6 @@ pipeline {
     post {
         always{
            bat 'docker logout'
-
            bat 'docker rmi 9766945760/k8s-mysql-app:latest'
         }
     }
