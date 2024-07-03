@@ -38,8 +38,6 @@ pipeline {
         stage('Deploy To K8s') {
              steps {
                   script{
-                      kubernetesDeploy(configs: 'mysql-configmap.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
-                      kubernetesDeploy(configs: 'mysql-secrets.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
                       kubernetesDeploy(configs: 'mysql-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
                       kubernetesDeploy(configs: 'app-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
                   }
