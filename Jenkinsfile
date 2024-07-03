@@ -41,13 +41,10 @@ pipeline {
                       kubernetesDeploy(configs: 'mysql-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
                       kubernetesDeploy(configs: 'app-deployment.yaml', enableConfigSubstitution: false, kubeconfigId: 'kubernetes_config')
                   }
+                  bat 'docker logout'
+                  bat 'docker rmi 9766945760/k8s-mysql-app:latest'
                   echo 'SUCCESS'
              }
-        }
-    }
-    post{
-        always {
-    	   bat 'docker logout'
         }
     }
 }
