@@ -48,6 +48,7 @@ pipeline {
     post {
         always{
            bat 'docker logout'
+
            bat 'docker rmi 9766945760/k8s-mysql-app:latest'
         }
     }
