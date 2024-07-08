@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-demo-app
+  name: khata-book-app
   labels:
-    app: spring-demo-app
+    app: khata-book-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-demo-app
+      app: khata-book-app
   template:
     metadata:
       labels:
-        app: spring-demo-app
+        app: khata-book-app
     spec:
       containers:
-        - name: spring-demo-app
-          image: 9766945760/k8s-mysql-app:latest
+        - name: khata-book-app
+          image: 9766945760/khatabook-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 9091
+              containerPort: 9092
           resources:
             limits:
               cpu: 0.2
@@ -57,16 +57,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-demo-app
+  name: khata-book-app
   labels:
-    app: spring-demo-app
+    app: khata-book-app
 spec:
   type: LoadBalancer
   selector:
-    app: spring-demo-app
+    app: khata-book-app
   ports:
     - protocol: TCP
       name: http
-      port: 9091
-      targetPort: 9091
+      port: 9092
+      targetPort: 9092
       nodePort: 30000

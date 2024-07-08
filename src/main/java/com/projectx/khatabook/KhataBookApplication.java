@@ -1,13 +1,13 @@
-package com.projectx.k8s_mysql_demo;
+package com.projectx.khatabook;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class K8sMysqlDemoApplication {
+public class KhataBookApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(K8sMysqlDemoApplication.class, args);
+		SpringApplication.run(KhataBookApplication.class, args);
 	}
 
 }

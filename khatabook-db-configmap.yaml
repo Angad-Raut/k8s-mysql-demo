@@ -4,4 +4,4 @@ metadata:
   name: mysql-conf
 data:
   host: mysql   # The name of mysql service
-  database-name: kubernetesDb     # The name of the database used by the demo app
+  database-name: khatabookDb     # The name of the database
